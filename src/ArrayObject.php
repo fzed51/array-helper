@@ -15,7 +15,7 @@ class ArrayObject extends \ArrayObject
 {
     /**
      * ArrayObject constructor.
-     * @param array $input
+     * @param mixed[] $input
      */
     public function __construct($input = [])
     {
@@ -25,7 +25,7 @@ class ArrayObject extends \ArrayObject
     /**
      * Change la casse de toutes les clés d'un tableau
      * @param int $case Soit CASE_UPPER (majuscules), soit CASE_LOWER (minuscules, valeur par défaut)
-     * @return \Helper\ArrayObject
+     * @return \Helper\ArrayObject<mixed>
      */
     public function changeKeyCase(int $case = CASE_LOWER): self
     {
@@ -38,7 +38,7 @@ class ArrayObject extends \ArrayObject
      * @param int $size La taille de chaque tableau
      * @param bool $preserve_keys Lorsque définit à TRUE, les clés seront préservées. Par défaut, vaut FALSE ce qui
      *     réindexera le tableau résultant numériquement
-     * @return \Helper\ArrayObject
+     * @return \Helper\ArrayObject<mixed>
      */
     public function chunk(int $size, bool $preserve_keys = false): self
     {
@@ -51,12 +51,11 @@ class ArrayObject extends \ArrayObject
      * @param callable $callback La fonction de rappel à exécuter pour chaque élément de chaque tableau.
      * @param array[] ...$other Liste variable d'arguments tableaux supplémentaires à exécuter via la fonction de
      *     rappel callback.
-     * @return \Helper\ArrayObject
+     * @return \Helper\ArrayObject<mixed>
      */
     public function map(callable $callback, array ...$other): self
     {
         $a = $this->getArrayCopy();
         return new self(array_map($callback, $a, ...$other));
     }
-
 }

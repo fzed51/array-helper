@@ -1,5 +1,11 @@
 <?php
+declare(strict_types=1);
+/**
+ * @author Fabien Sanchez
+ * @ceatedAt 2020-09-06
+ */
 
+namespace Test;
 
 use Helper\ArrayObject;
 use PHPUnit\Framework\TestCase;
