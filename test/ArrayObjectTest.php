@@ -40,4 +40,23 @@ class ArrayObjectTest extends TestCase
         $a = new ArrayObject($o);
         self::assertEquals($e, $a->chunk(2)->getArrayCopy());
     }
+
+    /**
+     * test de map
+     */
+    public function testMap(): void
+    {
+        $o = [
+            ['id' => 1],
+            ['id' => 2],
+            ['id' => 3],
+            ['id' => 4],
+        ];
+        $callback = function ($item) {
+            return $item['id'];
+        };
+        $e = array_map($callback, $o);
+        $a = new ArrayObject($o);
+        self::assertEquals($e, $a->map($callback)->getArrayCopy());
+    }
 }

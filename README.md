@@ -86,6 +86,17 @@ $array = new \Helper\ArrayObject([]);
 - `array_keys`
 
 - `array_map`
+ 
+  ```php
+      $array = new \Helper\ArrayObject([['id'=>1],['id'=>2]]);
+      $array = $array->map(function($i){return $i['id'];}); // [1,2]
+  ```
+
+  **array_map** ( _callable_ $callback [, _array_ $... ] ) : _array_
+
+  - array1 : Un tableau à exécuter via la fonction de rappel callback.
+
+  - ... : Liste variable d'arguments tableaux supplémentaires à exécuter via la fonction de rappel callback.
 
 - `array_merge_recursive`
 

@@ -36,9 +36,9 @@ class ArrayObject extends \ArrayObject
     /**
      * Sépare un tableau en tableaux de taille inférieure
      * @param int $size La taille de chaque tableau
-     * @param bool $preserve_keys
-     * @return $this Lorsque définit à TRUE, les clés seront préservées. Par défaut, vaut FALSE ce qui réindexera le
-     *     tableau résultant numériquement
+     * @param bool $preserve_keys Lorsque définit à TRUE, les clés seront préservées. Par défaut, vaut FALSE ce qui
+     *     réindexera le tableau résultant numériquement
+     * @return \Helper\ArrayObject
      */
     public function chunk(int $size, bool $preserve_keys = false): self
     {
@@ -46,5 +46,17 @@ class ArrayObject extends \ArrayObject
         return new self(array_chunk($a, $size, $preserve_keys));
     }
 
-    
+    /**
+     * Applique une fonction sur les éléments d'un tableau
+     * @param callable $callback La fonction de rappel à exécuter pour chaque élément de chaque tableau.
+     * @param array[] ...$other Liste variable d'arguments tableaux supplémentaires à exécuter via la fonction de
+     *     rappel callback.
+     * @return \Helper\ArrayObject
+     */
+    public function map(callable $callback, array ...$other): self
+    {
+        $a = $this->getArrayCopy();
+        return new self(array_map($callback, $a, ...$other));
+    }
+
 }
