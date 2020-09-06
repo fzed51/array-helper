@@ -1,0 +1,16 @@
+{
+    "name": "fzed51/array-helper",
+    "description": "Classe de manipulation de tableau. Permet d'utiliser les fonction de base des tableau de maniere POO. Cette classe applique le principe d'immutabilit\u0000.",
+    "type": "library",
+    "require-dev": {
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Fabien Sanchez",
+            "email": "fzed51+git@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
