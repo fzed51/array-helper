@@ -22,7 +22,26 @@ $array = new \Helper\ArrayObject([]);
 
 - `array_change_key_case`
 
+  ```php
+      $array = new \Helper\ArrayObject(['Abc'=>1]);
+      $array = $array->changeKetCase(); // ['abc'=>1]
+  ```
+
+  **changeKetCase** ( [_int_ $case = CASE_LOWER]) : _array_
+
+  - case : Soit CASE_UPPER (majuscules), soit CASE_LOWER (minuscules, valeur par défaut)
+
 - `array_chunk`
+
+  ```php
+      $array = new \Helper\ArrayObject([1,2,3]);
+      $array = $array->chunk(2); // [[1,2],[3]]
+  ```
+
+  **chunk** ( _int_ $size [, _bool_ $preserve*keys = FALSE ] ) : \_array*
+
+  - size : La taille de chaque tableau
+  - preserve_keys : Lorsque définit à TRUE, les clés seront préservées. Par défaut, vaut FALSE ce qui réindexera le tableau résultant numériquement
 
 - `array_column`
 
@@ -67,6 +86,17 @@ $array = new \Helper\ArrayObject([]);
 - `array_keys`
 
 - `array_map`
+ 
+  ```php
+      $array = new \Helper\ArrayObject([['id'=>1],['id'=>2]]);
+      $array = $array->map(function($i){return $i['id'];}); // [1,2]
+  ```
+
+  **array_map** ( _callable_ $callback [, _array_ $... ] ) : _array_
+
+  - array1 : Un tableau à exécuter via la fonction de rappel callback.
+
+  - ... : Liste variable d'arguments tableaux supplémentaires à exécuter via la fonction de rappel callback.
 
 - `array_merge_recursive`
 
