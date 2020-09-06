@@ -1,4 +1,5 @@
 <?php
+/** @noinspection StaticClosureCanBeUsedInspection */
 declare(strict_types=1);
 /**
  * @author Fabien Sanchez
@@ -64,5 +65,19 @@ class ArrayObjectTest extends TestCase
         $e = array_map($callback, $o);
         $a = new ArrayObject($o);
         self::assertEquals($e, $a->map($callback)->getArrayCopy());
+    }
+
+    /**
+     * test de filter
+     */
+    public function testFilter(): void
+    {
+        $o = [1, 2, 3, 4, 5];
+        $callback = function ($item) {
+            return $item > 2;
+        };
+        $e = array_filter($o, $callback);
+        $a = new ArrayObject($o);
+        self::assertEquals($e, $a->filter($callback)->getArrayCopy());
     }
 }
