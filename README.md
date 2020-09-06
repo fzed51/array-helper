@@ -33,6 +33,16 @@ $array = new \Helper\ArrayObject([]);
 
 - `array_chunk`
 
+  ```php
+      $array = new \Helper\ArrayObject([1,2,3]);
+      $array = $array->chunk(2); // [[1,2],[3]]
+  ```
+
+  **chunk** ( _int_ $size [, _bool_ $preserve*keys = FALSE ] ) : \_array*
+
+  - size : La taille de chaque tableau
+  - preserve_keys : Lorsque définit à TRUE, les clés seront préservées. Par défaut, vaut FALSE ce qui réindexera le tableau résultant numériquement
+
 - `array_column`
 
 - `array_combine`

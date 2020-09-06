@@ -32,4 +32,19 @@ class ArrayObject extends \ArrayObject
         $a = $this->getArrayCopy();
         return new self(array_change_key_case($a, $case));
     }
+
+    /**
+     * Sépare un tableau en tableaux de taille inférieure
+     * @param int $size La taille de chaque tableau
+     * @param bool $preserve_keys
+     * @return $this Lorsque définit à TRUE, les clés seront préservées. Par défaut, vaut FALSE ce qui réindexera le
+     *     tableau résultant numériquement
+     */
+    public function chunk(int $size, bool $preserve_keys = false): self
+    {
+        $a = $this->getArrayCopy();
+        return new self(array_chunk($a, $size, $preserve_keys));
+    }
+
+    
 }
