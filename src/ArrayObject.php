@@ -58,4 +58,17 @@ class ArrayObject extends \ArrayObject
         $a = $this->getArrayCopy();
         return new self(array_map($callback, $a, ...$other));
     }
+
+
+    /**
+     * Filtre les éléments d'un tableau grâce à une fonction de rappel
+     * @param callable $callback La fonction de rappel à utiliser.
+     * @param int $flag Drapeau indiquant quels sont les arguments à envoyer à la fonction de rappel callback
+     * @return \Helper\ArrayObject<mixed>
+     */
+    public function filter(callable $callback, int $flag = 0): self
+    {
+        $a = $this->getArrayCopy();
+        return new self(array_filter($a, $callback, $flag));
+    }
 }
