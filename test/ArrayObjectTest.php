@@ -18,4 +18,15 @@ class ArrayObjectTest extends TestCase
         self::assertInstanceOf(ArrayObject::class, $a);
         self::assertInstanceOf(\ArrayObject::class, $a);
     }
+
+    /**
+     * test de changeKeyCase
+     */
+    public function testChangeKeyCase(): void
+    {
+        $o = ['Aze'=>1];
+        $e = array_change_key_case($o);
+        $a = new ArrayObject($o);
+        self::assertEquals($e, $a->changeKeyCase()->getArrayCopy());
+    }
 }

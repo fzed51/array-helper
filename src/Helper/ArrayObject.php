@@ -22,4 +22,14 @@ class ArrayObject extends \ArrayObject
         parent::__construct($input);
     }
 
+    /**
+     * Change la casse de toutes les clés d'un tableau
+     * @param int $case Soit CASE_UPPER (majuscules), soit CASE_LOWER (minuscules, valeur par défaut)
+     * @return \Helper\ArrayObject
+     */
+    public function changeKeyCase(int $case = CASE_LOWER): self
+    {
+        $a = $this->getArrayCopy();
+        return new self(array_change_key_case($a, $case));
+    }
 }

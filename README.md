@@ -22,6 +22,15 @@ $array = new \Helper\ArrayObject([]);
 
 - `array_change_key_case`
 
+  ```php
+      $array = new \Helper\ArrayObject(['Abc'=>1]);
+      $array = $array->changeKetCase(); // ['abc'=>1]
+  ```
+
+  **changeKetCase** ( [_int_ $case = CASE_LOWER]) : _array_
+
+  - case : Soit CASE_UPPER (majuscules), soit CASE_LOWER (minuscules, valeur par défaut)
+
 - `array_chunk`
 
 - `array_column`
