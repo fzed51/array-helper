@@ -103,4 +103,16 @@ class ArrayObjectTest extends TestCase
         $a = new ArrayObject($o);
         self::assertEquals($e, $a->column('prenom')->getArrayCopy());
     }
+
+    /**
+     * test de combine
+     */
+    public function testCombine(): void
+    {
+        $o = ['d', 'e', 'f'];
+        $array = new \Helper\ArrayObject($o);
+        $values = ['a', 'b', 'c'];
+        self::assertEquals(array_combine($o, $values), $array->combine($values)->getArrayCopy());
+        self::assertEquals(array_combine($values, $o), $array->combine($values, true)->getArrayCopy());
+    }
 }

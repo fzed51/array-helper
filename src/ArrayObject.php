@@ -88,4 +88,16 @@ class ArrayObject extends \ArrayObject
         $a = $this->getArrayCopy();
         return new self(array_column($a, $column_key, $index_key));
     }
+
+    /**
+     * Crée un tableau à partir de deux autres tableaux
+     * @param mixed[] $values Tableau de valeurs à utiliser
+     * @param bool $isKey Indique si le tableau _values_ doit être utilisé comme tableau de clé
+     * @return \Helper\ArrayObject<mixed,mixed>
+     */
+    public function combine(array $values, bool $isKey = false): self
+    {
+        $a = $this->getArrayCopy();
+        return $isKey ? new self(array_combine($values, $a)) : new self(array_combine($a, $values));
+    }
 }
