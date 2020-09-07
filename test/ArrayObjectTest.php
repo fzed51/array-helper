@@ -80,4 +80,27 @@ class ArrayObjectTest extends TestCase
         $a = new ArrayObject($o);
         self::assertEquals($e, $a->filter($callback)->getArrayCopy());
     }
+
+    /**
+     * test de Column
+     */
+    public function testColumn(): void
+    {
+        $o = [[
+            'id' => 2135,
+            'prenom' => 'John',
+        ], [
+            'id' => 3245,
+            'prenom' => 'Sally',
+        ], [
+            'id' => 5342,
+            'prenom' => 'Jane',
+        ], [
+            'id' => 5623,
+            'prenom' => 'Peter',
+        ]];
+        $e = array_column($o, 'prenom');
+        $a = new ArrayObject($o);
+        self::assertEquals($e, $a->column('prenom')->getArrayCopy());
+    }
 }

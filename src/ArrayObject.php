@@ -71,4 +71,21 @@ class ArrayObject extends \ArrayObject
         $a = $this->getArrayCopy();
         return new self(array_filter($a, $callback, $flag));
     }
+
+    /**
+     * Retourne les valeurs d'une colonne d'un tableau d'entrée
+     * @param mixed $column_key La colonne de valeurs à retourner. Cette valeur peut être la clé entière de la colonne
+     *     que vous souhaitez récupérer, ou bien le nom de la clé pour un tableau associatif ou le nom de la propriété.
+     *     Il peut aussi valoir NULL pour retourner le tableau complet ou des objets (ceci peut être utile en
+     *     conjonction du paramètre index_key pour ré-indexer le tableau).
+     * @param mixed $index_key La colonne à utiliser comme index/clé pour le tableau retourné. Cette valeur peut être
+     *     la clé entière de la colonne, ou le nom de la clé. La valeur est cast comme d'habitude pour les clés du
+     *     tableau (cependant, les objects qui supportent une conversion en chaîne de charactère sont aussi autorisé).
+     * @return \Helper\ArrayObject<mixed>
+     */
+    public function column($column_key, $index_key = null): self
+    {
+        $a = $this->getArrayCopy();
+        return new self(array_column($a, $column_key, $index_key));
+    }
 }
