@@ -66,6 +66,12 @@ $array = new \Helper\ArrayObject([]);
   
 - `array_count_values`
 
+  ```php
+      $array = new \Helper\ArrayObject([1,"hello",1,"world","hello"]);
+      $array = $array->countValues(); // [1=> 2,"hello"=>2,"world"=>1]
+  ```
+  **countValues** () : _\Helper\ArrayObject_
+    
 - `array_diff_assoc`
 
 - `array_diff_key`

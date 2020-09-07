@@ -100,4 +100,14 @@ class ArrayObject extends \ArrayObject
         $a = $this->getArrayCopy();
         return $isKey ? new self(array_combine($values, $a)) : new self(array_combine($a, $values));
     }
+
+    /**
+     * Compte le nombre de valeurs d'un tableau
+     * @return \Helper\ArrayObject<mixed,mixed>
+     */
+    public function countValues(): self
+    {
+        $a = $this->getArrayCopy();
+        return new self(array_count_values($a));
+    }
 }

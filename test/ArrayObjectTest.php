@@ -115,4 +115,15 @@ class ArrayObjectTest extends TestCase
         self::assertEquals(array_combine($o, $values), $array->combine($values)->getArrayCopy());
         self::assertEquals(array_combine($values, $o), $array->combine($values, true)->getArrayCopy());
     }
+
+    /**
+     * test de countValues
+     */
+    public function testCountValues(): void
+    {
+        $o = ['d', 'e', 'f', 'e', 'd', 'e'];
+        $array = new \Helper\ArrayObject($o);
+        $e = array_count_values($o);
+        self::assertEquals($e, $array->countValues()->getArrayCopy());
+    }
 }
