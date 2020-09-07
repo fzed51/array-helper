@@ -41,6 +41,16 @@ $array = new \Helper\ArrayObject([]);
 
 - `array_column`
 
+  ```php
+      $array = new \Helper\ArrayObject([
+          ['id'=>1, 'nom'=>'jean'],
+          ['id'=>2, 'nom'=>'marie'],
+      ]);
+      $array = $array->column('nom'); // ['jean','marie']
+  ```
+  - column_key : La colonne de valeurs à retourner. Cette valeur peut être la clé entière de la colonne que vous souhaitez récupérer, ou bien le nom de la clé pour un tableau associatif ou le nom de la propriété. Il peut aussi valoir NULL pour retourner le tableau complet ou des objets (ceci peut être utile en conjonction du paramètre index_key pour ré-indexer le tableau).
+  - index_key : La colonne à utiliser comme index/clé pour le tableau retourné. Cette valeur peut être la clé entière de la colonne, ou le nom de la clé. La valeur est cast comme d'habitude pour les clés du tableau (cependant, les objects qui supportent une conversion en chaîne de charactère sont aussi autorisé).
+  
 - `array_combine`
 
 - `array_count_values`
