@@ -1,6 +1,13 @@
 {
     "name": "fzed51/array-helper",
     "description": "Classe de manipulation de tableau. Permet d'utiliser les fonction de base des tableau de maniere POO. Cette classe applique le principe d'immutabilit\u0000.",
+    "keywords" : [
+        "php",
+        "array",
+        "array-methods",
+        "method-chaining",
+        "imutability"
+    ],
     "type": "library",
     "license": "MIT",
     "authors": [
