@@ -22,6 +22,7 @@ $array = new \Helper\ArrayObject([]);
 
 - `array_change_key_case`
 
+  Change la casse de toutes les clés d'un tableau
   ```php
       $array = new \Helper\ArrayObject(['Abc'=>1]);
       $array = $array->changeKetCase(); // ['abc'=>1]
@@ -31,6 +32,7 @@ $array = new \Helper\ArrayObject([]);
 
 - `array_chunk`
 
+  Sépare un tableau en tableaux de taille inférieure
   ```php
       $array = new \Helper\ArrayObject([1,2,3]);
       $array = $array->chunk(2); // [[1,2],[3]]
@@ -41,6 +43,7 @@ $array = new \Helper\ArrayObject([]);
 
 - `array_column`
 
+  Retourne les valeurs d'une colonne d'un tableau d'entrée
   ```php
       $array = new \Helper\ArrayObject([
           ['id'=>1, 'nom'=>'jean'],
@@ -54,6 +57,7 @@ $array = new \Helper\ArrayObject([]);
   
 - `array_combine`
 
+  Crée un tableau à partir de deux autres tableaux
   ```php
       $array = new \Helper\ArrayObject(['d','e','f']);
       $values = ['a','b','c'];
@@ -61,11 +65,12 @@ $array = new \Helper\ArrayObject([]);
       $array = $array->combine($values,true); // ['a'=>'d','b'=>'e','c'=>'f']
   ```
   **combine** ( _array_ $values, _bool_ $isKey = FALSE) : _\Helper\ArrayObject_
-  values : Tableau de valeurs à utiliser
-  isKey : Indique si le tableau _values_ doit être utilisé comme tableau de clé
+  - values : Tableau de valeurs à utiliser
+  - isKey : Indique si le tableau _values_ doit être utilisé comme tableau de clé
   
 - `array_count_values`
 
+  Compte le nombre de valeurs d'un tableau
   ```php
       $array = new \Helper\ArrayObject([1,"hello",1,"world","hello"]);
       $array = $array->countValues(); // [1=> 2,"hello"=>2,"world"=>1]
@@ -74,22 +79,37 @@ $array = new \Helper\ArrayObject([]);
     
 - `array_diff_assoc`
   
-  
+  Calcule la différence de deux tableaux, en prenant aussi en compte les clés
   ```php
       $array = new \Helper\ArrayObject([1,'a'=>'b',2,'c'=>'d']);
       $array = $array->diffAssoc([1,4,'a'=>'b',2]); // [2,'c'=>'d']
   ```
   **diffAssoc** (_array_ $array , _array_ $...) : _\Helper\ArrayObject_
-  array : Le tableau à comparer
-  ... : Plus de tableaux à comparer
+  - array : Le tableau à comparer
+  - ... : Plus de tableaux à comparer
 
 - `array_diff_key`
+  
+  Calcule la différence de deux tableaux en utilisant les clés pour comparaison
+  ```php
+      $array = new \Helper\ArrayObject(['a'=>1,'b'=>2,'c'=>3]);
+      $array = $array->diffKey(['c'=>4,'e'=>5]); // ['a'=>1,'b'=>2]
+  ```
+  **diffKey** (_array_ $array , _array_ $...) : _\Helper\ArrayObject_
+  - array : Le tableau à comparer
+  - ... : Plus de tableaux à comparer
 
 - `array_diff_uassoc`
 
 - `array_diff_ukey`
 
 - `array_diff`
+
+- `array_udiff_assoc`
+
+- `array_udiff_uassoc`
+
+- `array_udiff`
 
 - `array_fill_keys`
 
@@ -99,7 +119,7 @@ $array = new \Helper\ArrayObject([]);
  
   ```php
       $array = new \Helper\ArrayObject([1,2,3,4]);
-      $array = $array->map(function($i){return $i>2;}); // [3.4]
+      $array = $array->map(function($i){return $i>2;}); // [3,4]
   ```
   **filter** ( [_callable_ $callback [, _int_ $flag = 0 ]] ) : _\Helper\ArrayObject_
   - callback : La fonction de rappel à utiliser  
@@ -170,12 +190,6 @@ $array = new \Helper\ArrayObject([]);
 - `array_splice`
 
 - `array_sum`
-
-- `array_udiff_assoc`
-
-- `array_udiff_uassoc`
-
-- `array_udiff`
 
 - `array_uintersect_assoc`
 

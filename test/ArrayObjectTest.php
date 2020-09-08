@@ -138,4 +138,16 @@ class ArrayObjectTest extends TestCase
         $e = array_diff_assoc($o, $arr);
         self::assertEquals($e, $array->diffAssoc($arr)->getArrayCopy());
     }
+
+    /**
+     * test de deffKey
+     */
+    public function testDiffKey(): void
+    {
+        $o = ['a' => 1, 'b' => 2, 'c' => 3];
+        $t = ['c' => 4, 'e' => 5];
+        $array = new ArrayObject($o);
+        $e = array_diff_key($o, $t);
+        self::assertEquals($e, $array->diffKey($t)->getArrayCopy());
+    }
 }
