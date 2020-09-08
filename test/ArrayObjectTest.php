@@ -110,7 +110,7 @@ class ArrayObjectTest extends TestCase
     public function testCombine(): void
     {
         $o = ['d', 'e', 'f'];
-        $array = new \Helper\ArrayObject($o);
+        $array = new ArrayObject($o);
         $values = ['a', 'b', 'c'];
         self::assertEquals(array_combine($o, $values), $array->combine($values)->getArrayCopy());
         self::assertEquals(array_combine($values, $o), $array->combine($values, true)->getArrayCopy());
@@ -122,7 +122,7 @@ class ArrayObjectTest extends TestCase
     public function testCountValues(): void
     {
         $o = ['d', 'e', 'f', 'e', 'd', 'e'];
-        $array = new \Helper\ArrayObject($o);
+        $array = new ArrayObject($o);
         $e = array_count_values($o);
         self::assertEquals($e, $array->countValues()->getArrayCopy());
     }
@@ -133,7 +133,7 @@ class ArrayObjectTest extends TestCase
     public function testDiffAssoc(): void
     {
         $o = ['a' => 'vert', 'b' => 'marron', 'c' => 'bleu', 'rouge'];
-        $array = new \Helper\ArrayObject($o);
+        $array = new ArrayObject($o);
         $arr = ['a' => 'vert', 'jaune', 'rouge'];
         $e = array_diff_assoc($o, $arr);
         self::assertEquals($e, $array->diffAssoc($arr)->getArrayCopy());
