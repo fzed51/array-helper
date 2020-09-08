@@ -73,6 +73,15 @@ $array = new \Helper\ArrayObject([]);
   **countValues** () : _\Helper\ArrayObject_
     
 - `array_diff_assoc`
+  
+  
+  ```php
+      $array = new \Helper\ArrayObject([1,'a'=>'b',2,'c'=>'d']);
+      $array = $array->diffAssoc([1,4,'a'=>'b',2]); // [2,'c'=>'d']
+  ```
+  **diffAssoc** (_array_ $array , _array_ $...) : _\Helper\ArrayObject_
+  array : Le tableau à comparer
+  ... : Plus de tableaux à comparer
 
 - `array_diff_key`
 

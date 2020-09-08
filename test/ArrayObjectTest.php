@@ -126,4 +126,16 @@ class ArrayObjectTest extends TestCase
         $e = array_count_values($o);
         self::assertEquals($e, $array->countValues()->getArrayCopy());
     }
+
+    /**
+     * test de diffAssoc
+     */
+    public function testDiffAssoc(): void
+    {
+        $o = ['a' => 'vert', 'b' => 'marron', 'c' => 'bleu', 'rouge'];
+        $array = new \Helper\ArrayObject($o);
+        $arr = ['a' => 'vert', 'jaune', 'rouge'];
+        $e = array_diff_assoc($o, $arr);
+        self::assertEquals($e, $array->diffAssoc($arr)->getArrayCopy());
+    }
 }

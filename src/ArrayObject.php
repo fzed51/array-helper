@@ -110,4 +110,16 @@ class ArrayObject extends \ArrayObject
         $a = $this->getArrayCopy();
         return new self(array_count_values($a));
     }
+
+    /**
+     * Calcule la différence de deux tableaux, en prenant aussi en compte les clés
+     * @param mixed[] $array Le tableau à comparer
+     * @param mixed[] ...$other Plus de tableaux à comparer
+     * @return \Helper\ArrayObject<mixed>
+     */
+    public function diffAssoc(array $array, array ...$other): self
+    {
+        $a = $this->getArrayCopy();
+        return new self(array_diff_assoc($a, $array, ...$other));
+    }
 }
