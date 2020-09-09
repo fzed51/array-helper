@@ -101,6 +101,17 @@ $array = new \Helper\ArrayObject([]);
 
 - `array_diff_uassoc`
 
+  Calcule la différence entre deux tableaux associatifs, à l'aide d'une fonction de rappel
+  ````php
+    $call = function ($key1, $key2) { return $key1 === $key2 ? 0 : (($key1 > $key2) ? 1 : -1); };
+    $array = new \Helper\ArrayObject(['a'=>1,1,'b'=>2,'c'=>3,2]);
+    $array = $array->diffUAssoc($call,['c'=>4,'d'=>5,3]); // ['a'=>1,'b'=>2,2]
+  ````
+    **diffUAssoc** (_callable_ $keyCompare, _array_ $array , _array_ $...) : _\Helper\ArrayObject_
+    - keyCompare : La fonction de comparaison doit retourner un entier inférieur à, égal à, ou supérieur à 0 si le premier argument est considéré comme, respectivement, inférieur à, égal à, ou supérieur au second.
+    - array : Le tableau à comparer
+    - ... : Plus de tableaux à comparer
+
 - `array_diff_ukey`
 
 - `array_diff`

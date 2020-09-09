@@ -134,4 +134,19 @@ class ArrayObject extends \ArrayObject
         $a = $this->getArrayCopy();
         return new self(array_diff_key($a, $array, ...$other));
     }
+
+    /**
+     * Calcule la différence entre deux tableaux associatifs, à l'aide d'une fonction de rappel
+     * @param callable $keyCompare La fonction de comparaison des clés
+     * @param mixed[] $array Le tableau à comparer
+     * @param mixed[] ...$other Plus de tableaux à comparer
+     * @return \Helper\ArrayObject<mixed>
+     */
+    public function diffUAssoc(callable $keyCompare, array $array, array ...$other): self
+    {
+        $a = $this->getArrayCopy();
+        $lastArgs = $other;
+        $lastArgs[] = $keyCompare;
+        return new self(array_diff_uassoc($a, $array, ...$lastArgs));
+    }
 }
