@@ -33,8 +33,10 @@ class ArrayObjectTest extends TestCase
     {
         $o = ['Aze' => 1];
         $e = array_change_key_case($o);
-        $a = new ArrayObject($o);
-        self::assertEquals($e, $a->changeKeyCase()->getArrayCopy());
+        $array = new ArrayObject($o);
+        $a = $array->changeKeyCase()->getArrayCopy();
+        self::assertEquals($e, $a);
+        self::assertNotEquals($o, $a);
     }
 
     /**
@@ -44,8 +46,10 @@ class ArrayObjectTest extends TestCase
     {
         $o = [1, 2, 3, 4, 5];
         $e = array_chunk($o, 2);
-        $a = new ArrayObject($o);
-        self::assertEquals($e, $a->chunk(2)->getArrayCopy());
+        $array = new ArrayObject($o);
+        $a = $array->chunk(2)->getArrayCopy();
+        self::assertEquals($e, $a);
+        self::assertNotEquals($o, $a);
     }
 
     /**
@@ -63,8 +67,10 @@ class ArrayObjectTest extends TestCase
             return $item['id'];
         };
         $e = array_map($callback, $o);
-        $a = new ArrayObject($o);
-        self::assertEquals($e, $a->map($callback)->getArrayCopy());
+        $array = new ArrayObject($o);
+        $a = $array->map($callback)->getArrayCopy();
+        self::assertEquals($e, $a);
+        self::assertNotEquals($o, $a);
     }
 
     /**
@@ -77,8 +83,10 @@ class ArrayObjectTest extends TestCase
             return $item > 2;
         };
         $e = array_filter($o, $callback);
-        $a = new ArrayObject($o);
-        self::assertEquals($e, $a->filter($callback)->getArrayCopy());
+        $array = new ArrayObject($o);
+        $a = $array->filter($callback)->getArrayCopy();
+        self::assertEquals($e, $a);
+        self::assertNotEquals($o, $a);
     }
 
     /**
@@ -100,8 +108,10 @@ class ArrayObjectTest extends TestCase
             'prenom' => 'Peter',
         ]];
         $e = array_column($o, 'prenom');
-        $a = new ArrayObject($o);
-        self::assertEquals($e, $a->column('prenom')->getArrayCopy());
+        $array = new ArrayObject($o);
+        $a = $array->column('prenom')->getArrayCopy();
+        self::assertEquals($e, $a);
+        self::assertNotEquals($o, $a);
     }
 
     /**
@@ -112,8 +122,14 @@ class ArrayObjectTest extends TestCase
         $o = ['d', 'e', 'f'];
         $array = new ArrayObject($o);
         $values = ['a', 'b', 'c'];
-        self::assertEquals(array_combine($o, $values), $array->combine($values)->getArrayCopy());
-        self::assertEquals(array_combine($values, $o), $array->combine($values, true)->getArrayCopy());
+        $e = array_combine($o, $values);
+        $e2 = array_combine($values, $o);
+        $a = $array->combine($values)->getArrayCopy();
+        $a2 = $array->combine($values, true)->getArrayCopy();
+        self::assertEquals($e, $a);
+        self::assertNotEquals($o, $a);
+        self::assertEquals($e2, $a2);
+        self::assertNotEquals($o, $a2);
     }
 
     /**
@@ -124,7 +140,9 @@ class ArrayObjectTest extends TestCase
         $o = ['d', 'e', 'f', 'e', 'd', 'e'];
         $array = new ArrayObject($o);
         $e = array_count_values($o);
-        self::assertEquals($e, $array->countValues()->getArrayCopy());
+        $a = $array->countValues()->getArrayCopy();
+        self::assertEquals($e, $a);
+        self::assertNotEquals($o, $a);
     }
 
     /**
@@ -136,7 +154,9 @@ class ArrayObjectTest extends TestCase
         $array = new ArrayObject($o);
         $arr = ['a' => 'vert', 'jaune', 'rouge'];
         $e = array_diff_assoc($o, $arr);
-        self::assertEquals($e, $array->diffAssoc($arr)->getArrayCopy());
+        $a = $array->diffAssoc($arr)->getArrayCopy();
+        self::assertEquals($e, $a);
+        self::assertNotEquals($o, $a);
     }
 
     /**
@@ -148,6 +168,9 @@ class ArrayObjectTest extends TestCase
         $t = ['c' => 4, 'e' => 5];
         $array = new ArrayObject($o);
         $e = array_diff_key($o, $t);
-        self::assertEquals($e, $array->diffKey($t)->getArrayCopy());
+        $a = $array->diffKey($t)->getArrayCopy();
+        self::assertEquals($e, $a);
+        self::assertNotEquals($o, $a);
+    }
     }
 }
