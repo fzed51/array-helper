@@ -197,4 +197,24 @@ class ArrayObjectTest extends TestCase
         self::assertEquals($e2, $a2);
         self::assertNotEquals($o, $a2);
     }
+
+    /**
+     * test de uDiffAssoc
+     */
+    public function testUDiffAssoc(): void
+    {
+        $call = function ($key1, $key2) {
+            if ($key1 === $key2) {
+                return 0;
+            }
+            return $key1 > $key2 ? 1 : -1;
+        };
+        $o = ['a' => 1, 1, 'b' => 2, 'c' => 3, 2];
+        $array = new ArrayObject($o);
+        $t = ['c' => 3, 'd' => 5, 1];
+        $e = array_udiff_assoc($o, $t, $call);
+        $a = $array->uDiffAssoc($call, $t)->getArrayCopy();
+        self::assertEquals($e, $a);
+        self::assertNotEquals($o, $a);
+    }
 }
