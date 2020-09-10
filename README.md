@@ -25,7 +25,7 @@ $array = new \Helper\ArrayObject([]);
   Change la casse de toutes les clés d'un tableau
   ```php
       $array = new \Helper\ArrayObject(['Abc'=>1]);
-      $array = $array->changeKetCase(); // ['abc'=>1]
+      $array = $array->changeKeyCase(); // ['abc'=>1]
   ```
   **changeKetCase** ( [_int_ $case = CASE_LOWER]) : _\Helper\ArrayObject_
   - case : Soit CASE_UPPER (majuscules), soit CASE_LOWER (minuscules, valeur par défaut)
@@ -107,7 +107,31 @@ $array = new \Helper\ArrayObject([]);
 
 - `array_udiff_assoc`
 
+  Calcule la différence entre des tableaux avec vérification des index, compare les données avec une fonction de rappel
+  ````php
+    $call = function ($key1, $key2) { return $key1 === $key2 ? 0 : (($key1 > $key2) ? 1 : -1); };
+    $array = new \Helper\ArrayObject(['a'=>1,1,'b'=>2,'c'=>3,2]);
+    $array = $array->uDiffAssoc($call,['c'=>4,'d'=>5,3]); // ['a'=>1,'b'=>2,2]
+  ````
+  **uDiffAssoc** (_callable_ $valueCompare, _array_ $array , _array_ $...) : _\Helper\ArrayObject_
+  - valueCompare : La fonction de comparaison doit retourner un entier inférieur à, égal à, ou supérieur à 0 si le premier argument est considéré comme, respectivement, inférieur à, égal à, ou supérieur au second.
+  - array : Le tableau à comparer
+  - ... : Plus de tableaux à comparer
+  
 - `array_udiff_uassoc`
+
+  Calcule la différence de deux tableaux associatifs, compare les données et les index avec une fonction de rappel
+  ````php
+    $callKey = function ($key1, $key2) { return $key1 === $key2 ? 0 : (($key1 > $key2) ? 1 : -1); };
+    $callVal = function ($key1, $key2) { return $key1 === $key2 ? 0 : (($key1 > $key2) ? 1 : -1); };
+    $array = new \Helper\ArrayObject(['a'=>1,1,'b'=>2,'c'=>3,2]);
+    $array = $array->uDiffUAssoc($callVal,$callKey,['c'=>4,'d'=>5,3]); // ['a'=>1,'b'=>2,2]
+  ````
+  **uDiffUAssoc** (_callable_ $valueCompare, _callable_ $keyCompare, _array_ $array , _array_ $...) : _\Helper\ArrayObject_
+  - valueCompare : La fonction de comparaison doit retourner un entier inférieur à, égal à, ou supérieur à 0 si le premier argument est considéré comme, respectivement, inférieur à, égal à, ou supérieur au second.
+  - keyCompare : La fonction de comparaison doit retourner un entier inférieur à, égal à, ou supérieur à 0 si le premier argument est considéré comme, respectivement, inférieur à, égal à, ou supérieur au second.
+  - array : Le tableau à comparer
+  - ... : Plus de tableaux à comparer
 
 - `array_diff_key`
   
@@ -121,6 +145,17 @@ $array = new \Helper\ArrayObject([]);
   - ... : Plus de tableaux à comparer
 
 - `array_diff_ukey`
+
+  Calcule la différence entre deux tableaux en utilisant une fonction de rappel sur les clés pour comparaison
+  ```php
+      $call = function ($key1, $key2) { return $key1 === $key2 ? 0 : (($key1 > $key2) ? 1 : -1); };
+      $array = new \Helper\ArrayObject(['a'=>1,'b'=>2,'c'=>3]);
+      $array = $array->diffUKey($call,['c'=>4,'e'=>5]); // ['a'=>1,'b'=>2]
+  ```
+  **diffUKey** (_callable_ $keyCompare, _array_ $array , _array_ $...) : _\Helper\ArrayObject_
+  - keyCompare : La fonction de comparaison doit retourner un entier inférieur à, égal à, ou supérieur à 0 si le premier argument est considéré comme, respectivement, inférieur à, égal à, ou supérieur au second.
+  - array : Le tableau à comparer
+  - ... : Plus de tableaux à comparer
 
 - `array_fill_keys`
 
