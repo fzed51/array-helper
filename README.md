@@ -76,6 +76,10 @@ $array = new \Helper\ArrayObject([]);
       $array = $array->countValues(); // [1=> 2,"hello"=>2,"world"=>1]
   ```
   **countValues** () : _\Helper\ArrayObject_
+
+- `array_diff`
+
+- `array_udiff`
     
 - `array_diff_assoc`
   
@@ -85,17 +89,6 @@ $array = new \Helper\ArrayObject([]);
       $array = $array->diffAssoc([1,4,'a'=>'b',2]); // [2,'c'=>'d']
   ```
   **diffAssoc** (_array_ $array , _array_ $...) : _\Helper\ArrayObject_
-  - array : Le tableau à comparer
-  - ... : Plus de tableaux à comparer
-
-- `array_diff_key`
-  
-  Calcule la différence de deux tableaux en utilisant les clés pour comparaison
-  ```php
-      $array = new \Helper\ArrayObject(['a'=>1,'b'=>2,'c'=>3]);
-      $array = $array->diffKey(['c'=>4,'e'=>5]); // ['a'=>1,'b'=>2]
-  ```
-  **diffKey** (_array_ $array , _array_ $...) : _\Helper\ArrayObject_
   - array : Le tableau à comparer
   - ... : Plus de tableaux à comparer
 
@@ -112,15 +105,22 @@ $array = new \Helper\ArrayObject([]);
     - array : Le tableau à comparer
     - ... : Plus de tableaux à comparer
 
-- `array_diff_ukey`
-
-- `array_diff`
-
 - `array_udiff_assoc`
 
 - `array_udiff_uassoc`
 
-- `array_udiff`
+- `array_diff_key`
+  
+  Calcule la différence de deux tableaux en utilisant les clés pour comparaison
+  ```php
+      $array = new \Helper\ArrayObject(['a'=>1,'b'=>2,'c'=>3]);
+      $array = $array->diffKey(['c'=>4,'e'=>5]); // ['a'=>1,'b'=>2]
+  ```
+  **diffKey** (_array_ $array , _array_ $...) : _\Helper\ArrayObject_
+  - array : Le tableau à comparer
+  - ... : Plus de tableaux à comparer
+
+- `array_diff_ukey`
 
 - `array_fill_keys`
 
