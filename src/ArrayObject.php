@@ -174,12 +174,27 @@ class ArrayObject extends \ArrayObject
      * @param mixed[] ...$other Plus de tableaux à comparer
      * @return \Helper\ArrayObject<mixed>
      */
-    public function uDiffUAssoc(callable $ValueCompare, callable $keyCompare, array $array, array ...$other)
+    public function uDiffUAssoc(callable $ValueCompare, callable $keyCompare, array $array, array ...$other): self
     {
         $a = $this->getArrayCopy();
         $lastArgs = $other;
         $lastArgs[] = $ValueCompare;
         $lastArgs[] = $keyCompare;
         return new self(array_udiff_uassoc($a, $array, ...$lastArgs));
+    }
+
+    /**
+     * Calcule la différence entre deux tableaux en utilisant une fonction de rappel sur les clés pour comparaison
+     * @param callable $keyCompare La fonction de comparaison des clés
+     * @param mixed[] $array Le tableau à comparer
+     * @param mixed[] ...$other Plus de tableaux à comparer
+     * @return \Helper\ArrayObject<mixed>
+     */
+    public function diffUKey(callable $keyCompare, array $array, array ...$other): self
+    {
+        $a = $this->getArrayCopy();
+        $lastArgs = $other;
+        $lastArgs[] = $keyCompare;
+        return new self(array_diff_ukey($a, $array, ...$lastArgs));
     }
 }
