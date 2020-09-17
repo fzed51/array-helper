@@ -110,4 +110,91 @@ class ArrayObject extends \ArrayObject
         $a = $this->getArrayCopy();
         return new self(array_count_values($a));
     }
+
+    /**
+     * Calcule la différence de deux tableaux, en prenant aussi en compte les clés
+     * @param mixed[] $array Le tableau à comparer
+     * @param mixed[] ...$other Plus de tableaux à comparer
+     * @return \Helper\ArrayObject<mixed>
+     */
+    public function diffAssoc(array $array, array ...$other): self
+    {
+        $a = $this->getArrayCopy();
+        return new self(array_diff_assoc($a, $array, ...$other));
+    }
+
+    /**
+     * Calcule la différence de deux tableaux en utilisant les clés pour comparaison
+     * @param mixed[] $array Le tableau à comparer
+     * @param mixed[] ...$other Plus de tableaux à comparer
+     * @return \Helper\ArrayObject<mixed>
+     */
+    public function diffKey(array $array, array ...$other): self
+    {
+        $a = $this->getArrayCopy();
+        return new self(array_diff_key($a, $array, ...$other));
+    }
+
+    /**
+     * Calcule la différence entre deux tableaux associatifs, à l'aide d'une fonction de rappel
+     * @param callable $keyCompare La fonction de comparaison des clés
+     * @param mixed[] $array Le tableau à comparer
+     * @param mixed[] ...$other Plus de tableaux à comparer
+     * @return \Helper\ArrayObject<mixed>
+     */
+    public function diffUAssoc(callable $keyCompare, array $array, array ...$other): self
+    {
+        $a = $this->getArrayCopy();
+        $lastArgs = $other;
+        $lastArgs[] = $keyCompare;
+        return new self(array_diff_uassoc($a, $array, ...$lastArgs));
+    }
+
+    /**
+     * Calcule la différence entre des tableaux avec vérification des index, compare les données avec une fonction de
+     * rappel
+     * @param callable $ValueCompare La fonction de comparaison des valeurs
+     * @param mixed[] $array Le tableau à comparer
+     * @param mixed[] ...$other Plus de tableaux à comparer
+     * @return \Helper\ArrayObject<mixed>
+     */
+    public function uDiffAssoc(callable $ValueCompare, array $array, array ...$other): self
+    {
+        $a = $this->getArrayCopy();
+        $lastArgs = $other;
+        $lastArgs[] = $ValueCompare;
+        return new self(array_udiff_assoc($a, $array, ...$lastArgs));
+    }
+
+    /**
+     * Calcule la différence de deux tableaux associatifs, compare les données et les index avec une fonction de rappel
+     * @param callable $ValueCompare La fonction de comparaison des valeurs
+     * @param callable $keyCompare La fonction de comparaison des clés
+     * @param mixed[] $array Le tableau à comparer
+     * @param mixed[] ...$other Plus de tableaux à comparer
+     * @return \Helper\ArrayObject<mixed>
+     */
+    public function uDiffUAssoc(callable $ValueCompare, callable $keyCompare, array $array, array ...$other): self
+    {
+        $a = $this->getArrayCopy();
+        $lastArgs = $other;
+        $lastArgs[] = $ValueCompare;
+        $lastArgs[] = $keyCompare;
+        return new self(array_udiff_uassoc($a, $array, ...$lastArgs));
+    }
+
+    /**
+     * Calcule la différence entre deux tableaux en utilisant une fonction de rappel sur les clés pour comparaison
+     * @param callable $keyCompare La fonction de comparaison des clés
+     * @param mixed[] $array Le tableau à comparer
+     * @param mixed[] ...$other Plus de tableaux à comparer
+     * @return \Helper\ArrayObject<mixed>
+     */
+    public function diffUKey(callable $keyCompare, array $array, array ...$other): self
+    {
+        $a = $this->getArrayCopy();
+        $lastArgs = $other;
+        $lastArgs[] = $keyCompare;
+        return new self(array_diff_ukey($a, $array, ...$lastArgs));
+    }
 }

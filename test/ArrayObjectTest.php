@@ -33,8 +33,10 @@ class ArrayObjectTest extends TestCase
     {
         $o = ['Aze' => 1];
         $e = array_change_key_case($o);
-        $a = new ArrayObject($o);
-        self::assertEquals($e, $a->changeKeyCase()->getArrayCopy());
+        $array = new ArrayObject($o);
+        $a = $array->changeKeyCase()->getArrayCopy();
+        self::assertEquals($e, $a);
+        self::assertNotEquals($o, $a);
     }
 
     /**
@@ -44,8 +46,10 @@ class ArrayObjectTest extends TestCase
     {
         $o = [1, 2, 3, 4, 5];
         $e = array_chunk($o, 2);
-        $a = new ArrayObject($o);
-        self::assertEquals($e, $a->chunk(2)->getArrayCopy());
+        $array = new ArrayObject($o);
+        $a = $array->chunk(2)->getArrayCopy();
+        self::assertEquals($e, $a);
+        self::assertNotEquals($o, $a);
     }
 
     /**
@@ -63,8 +67,10 @@ class ArrayObjectTest extends TestCase
             return $item['id'];
         };
         $e = array_map($callback, $o);
-        $a = new ArrayObject($o);
-        self::assertEquals($e, $a->map($callback)->getArrayCopy());
+        $array = new ArrayObject($o);
+        $a = $array->map($callback)->getArrayCopy();
+        self::assertEquals($e, $a);
+        self::assertNotEquals($o, $a);
     }
 
     /**
@@ -77,8 +83,10 @@ class ArrayObjectTest extends TestCase
             return $item > 2;
         };
         $e = array_filter($o, $callback);
-        $a = new ArrayObject($o);
-        self::assertEquals($e, $a->filter($callback)->getArrayCopy());
+        $array = new ArrayObject($o);
+        $a = $array->filter($callback)->getArrayCopy();
+        self::assertEquals($e, $a);
+        self::assertNotEquals($o, $a);
     }
 
     /**
@@ -100,8 +108,10 @@ class ArrayObjectTest extends TestCase
             'prenom' => 'Peter',
         ]];
         $e = array_column($o, 'prenom');
-        $a = new ArrayObject($o);
-        self::assertEquals($e, $a->column('prenom')->getArrayCopy());
+        $array = new ArrayObject($o);
+        $a = $array->column('prenom')->getArrayCopy();
+        self::assertEquals($e, $a);
+        self::assertNotEquals($o, $a);
     }
 
     /**
@@ -110,10 +120,16 @@ class ArrayObjectTest extends TestCase
     public function testCombine(): void
     {
         $o = ['d', 'e', 'f'];
-        $array = new \Helper\ArrayObject($o);
+        $array = new ArrayObject($o);
         $values = ['a', 'b', 'c'];
-        self::assertEquals(array_combine($o, $values), $array->combine($values)->getArrayCopy());
-        self::assertEquals(array_combine($values, $o), $array->combine($values, true)->getArrayCopy());
+        $e = array_combine($o, $values);
+        $e2 = array_combine($values, $o);
+        $a = $array->combine($values)->getArrayCopy();
+        $a2 = $array->combine($values, true)->getArrayCopy();
+        self::assertEquals($e, $a);
+        self::assertNotEquals($o, $a);
+        self::assertEquals($e2, $a2);
+        self::assertNotEquals($o, $a2);
     }
 
     /**
@@ -122,8 +138,123 @@ class ArrayObjectTest extends TestCase
     public function testCountValues(): void
     {
         $o = ['d', 'e', 'f', 'e', 'd', 'e'];
-        $array = new \Helper\ArrayObject($o);
+        $array = new ArrayObject($o);
         $e = array_count_values($o);
-        self::assertEquals($e, $array->countValues()->getArrayCopy());
+        $a = $array->countValues()->getArrayCopy();
+        self::assertEquals($e, $a);
+        self::assertNotEquals($o, $a);
+    }
+
+    /**
+     * test de diffAssoc
+     */
+    public function testDiffAssoc(): void
+    {
+        $o = ['a' => 'vert', 'b' => 'marron', 'c' => 'bleu', 'rouge'];
+        $array = new ArrayObject($o);
+        $arr = ['a' => 'vert', 'jaune', 'rouge'];
+        $e = array_diff_assoc($o, $arr);
+        $a = $array->diffAssoc($arr)->getArrayCopy();
+        self::assertEquals($e, $a);
+        self::assertNotEquals($o, $a);
+    }
+
+    /**
+     * test de deffKey
+     */
+    public function testDiffKey(): void
+    {
+        $o = ['a' => 1, 'b' => 2, 'c' => 3];
+        $t = ['c' => 4, 'e' => 5];
+        $array = new ArrayObject($o);
+        $e = array_diff_key($o, $t);
+        $a = $array->diffKey($t)->getArrayCopy();
+        self::assertEquals($e, $a);
+        self::assertNotEquals($o, $a);
+    }
+
+    /**
+     * test de diffUAssoc
+     */
+    public function testDiffUAssoc(): void
+    {
+        $call = function ($key1, $key2) {
+            if ($key1 === $key2) {
+                return 0;
+            }
+            return $key1 > $key2 ? 1 : -1;
+        };
+        $o = ['a' => 1, 1, 'b' => 2, 'c' => 3, 2];
+        $array = new ArrayObject($o);
+        $t = ['c' => 3, 'd' => 5, 1];
+        $t2 = ['a' => 6, 4, 5];
+        $e = array_diff_uassoc($o, $t, $call);
+        $a = $array->diffUAssoc($call, $t)->getArrayCopy();
+        self::assertEquals($e, $a);
+        self::assertNotEquals($o, $a);
+        $e2 = array_diff_uassoc($o, $t, $t2, $call);
+        $a2 = $array->diffUAssoc($call, $t, $t2)->getArrayCopy();
+        self::assertEquals($e2, $a2);
+        self::assertNotEquals($o, $a2);
+    }
+
+    /**
+     * test de uDiffAssoc
+     */
+    public function testUDiffAssoc(): void
+    {
+        $call = function ($key1, $key2) {
+            if ($key1 === $key2) {
+                return 0;
+            }
+            return $key1 > $key2 ? 1 : -1;
+        };
+        $o = ['a' => 1, 1, 'b' => 2, 'c' => 3, 2];
+        $array = new ArrayObject($o);
+        $t = ['c' => 3, 'd' => 5, 1];
+        $e = array_udiff_assoc($o, $t, $call);
+        $a = $array->uDiffAssoc($call, $t)->getArrayCopy();
+        self::assertEquals($e, $a);
+        self::assertNotEquals($o, $a);
+    }
+
+    /**
+     * test de uDiffUAssoc
+     */
+    public function testUDiffUAssoc(): void
+    {
+        $call = function ($key1, $key2) {
+            if ($key1 === $key2) {
+                return 0;
+            }
+            return $key1 > $key2 ? 1 : -1;
+        };
+        $o = ['a' => 1, 1, 'b' => 2, 'c' => 3, 2];
+        $array = new ArrayObject($o);
+        $t = ['c' => 3, 'd' => 5, 1];
+        $e = array_udiff_assoc($o, $t, $call);
+        $a = $array->uDiffUAssoc($call, $call, $t)->getArrayCopy();
+        self::assertEquals($e, $a);
+        self::assertNotEquals($o, $a);
+    }
+
+    /**
+     * test de diffUKey
+     */
+    public function testDiffUKey(): void
+    {
+        $call = function ($key1, $key2) {
+            if ($key1 === $key2) {
+                return 0;
+            }
+            return $key1 > $key2 ? 1 : -1;
+        };
+        $o = ['a' => 1, 1, 'b' => 2, 'c' => 3, 2];
+        $array = new ArrayObject($o);
+        $t = ['c' => 3, 'd' => 5, 1];
+        $e = array_udiff_assoc($o, $t, $call);
+        $a = $array->diffUKey($call, $t)->getArrayCopy();
+        self::assertEquals($e, $a);
+        self::assertNotEquals($o, $a);
     }
 }
