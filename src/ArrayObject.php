@@ -23,6 +23,18 @@ class ArrayObject extends \ArrayObject
     }
 
     /**
+     * Remplit un tableau avec une même valeur
+     * @param int $startIndex
+     * @param int $nbElement
+     * @param mixed $value
+     * @return \Helper\ArrayObject<mixed>
+     */
+    public static function fill(int $startIndex, int $nbElement, $value): self
+    {
+        return new self(array_fill($startIndex, $nbElement, $value));
+    }
+
+    /**
      * Change la casse de toutes les clés d'un tableau
      * @param int $case Soit CASE_UPPER (majuscules), soit CASE_LOWER (minuscules, valeur par défaut)
      * @return \Helper\ArrayObject<mixed>

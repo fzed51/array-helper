@@ -157,9 +157,18 @@ $array = new \Helper\ArrayObject([]);
   - array : Le tableau à comparer
   - ... : Plus de tableaux à comparer
 
-- `array_fill_keys`
-
 - `array_fill`
+
+  Remplit un tableau avec une même valeur
+  ```php
+      $array = \Helper\ArrayObject::fill(0,5,'a'); // ['a','a','a','a','a']
+  ```
+  **fill** ( _int_ $startIndex , _int_ $nbElement , _mixed_ $value ) : _\Helper\ArrayObject_
+  - startIndex : Le premier index du tableau retourné.
+  - nbElement : Nombre d'éléments à insérer. Doit être supérieur ou égal à zéro.
+  - value : Valeur à utiliser pour remplir le tableau 
+
+- `array_fill_keys`
 
 - `array_filter`
  
