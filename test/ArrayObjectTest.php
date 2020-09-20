@@ -257,4 +257,24 @@ class ArrayObjectTest extends TestCase
         self::assertEquals($e, $a);
         self::assertNotEquals($o, $a);
     }
+
+    /**
+     * test de fill
+     */
+    public function testFill(): void
+    {
+        $e = array_fill(0, 5, 'a');
+        $a = ArrayObject::fill(0, 5, 'a')->getArrayCopy();
+        self::assertEquals($e, $a);
+    }
+
+    /**
+     * test de fillKey
+     */
+    public function testFillKey(): void
+    {
+        $e = array_fill_keys(['a', 'b', 'c'], 'a');
+        $a = ArrayObject::fillKey(['a', 'b', 'c'], 'a')->getArrayCopy();
+        self::assertEquals($e, $a);
+    }
 }
