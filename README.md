@@ -170,6 +170,14 @@ $array = new \Helper\ArrayObject([]);
 
 - `array_fill_keys`
 
+  Remplit un tableau avec des valeurs, en spécifiant les clés
+  ```php
+      $array = \Helper\ArrayObject::fillKey(['a','b','c'],'a'); // ['a'=>'a','b'=>'a','c'=>'a']
+  ```
+  **fillKey** ( _array_ $keys , _mixed_ $value ) : _\Helper\ArrayObject_
+  - keys : Tableau de valeurs qui sera utilisé comme clés. Les valeurs illégales pour les clés seront converties en chaînes de caractères.
+  - value : Valeur à utiliser pour remplir le tableau
+  
 - `array_filter`
  
   ```php

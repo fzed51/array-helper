@@ -35,6 +35,17 @@ class ArrayObject extends \ArrayObject
     }
 
     /**
+     * Remplit un tableau avec des valeurs, en spécifiant les clés
+     * @param mixed[] $keys
+     * @param mixed $value
+     * @return \Helper\ArrayObject<string,mixed>
+     */
+    public static function fillKey(array $keys, $value): self
+    {
+        return new self(array_fill_keys($keys, $value));
+    }
+
+    /**
      * Change la casse de toutes les clés d'un tableau
      * @param int $case Soit CASE_UPPER (majuscules), soit CASE_LOWER (minuscules, valeur par défaut)
      * @return \Helper\ArrayObject<mixed>
