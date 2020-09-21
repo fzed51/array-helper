@@ -242,4 +242,19 @@ class ArrayObject extends \ArrayObject
         $a = $this->getArrayCopy();
         return new self(array_diff($a, $array, ...$other));
     }
+
+    /**
+     * Calcule la différence entre deux tableaux en utilisant une fonction rappel
+     * @param callable $valueCompare
+     * @param mixed[] $array
+     * @param mixed[] ...$other
+     * @return \Helper\ArrayObject<mixed,mixed>
+     */
+    public function uDiff(callable $valueCompare, array $array, array ...$other): self
+    {
+        $a = $this->getArrayCopy();
+        $lastArgs = $other;
+        $lastArgs[] = $valueCompare;
+        return new self(array_udiff($a, $array, ...$lastArgs));
+    }
 }
