@@ -79,7 +79,27 @@ $array = new \Helper\ArrayObject([]);
 
 - `array_diff`
 
+  Calcule la différence entre des tableaux
+  ```php
+      $array = new \Helper\ArrayObject(['a'=>'green','red','blue','red']);
+      $array = $array->diff(['b'=>'green','yellow','red']); // ['blue']
+  ```
+  **diff** (_array_ $array , _array_ $...) : _\Helper\ArrayObject_
+  - array : Le tableau avec lequel comparer
+  - ... : Plus de tableaux avec lesquels comparer
+
 - `array_udiff`
+
+  Calcule la différence entre deux tableaux en utilisant une fonction rappel
+  ```php
+      $call = function ($key1, $key2) { return $key1 === $key2 ? 0 : (($key1 > $key2) ? 1 : -1); };
+      $array = new \Helper\ArrayObject(['a'=>'green','red','blue','red']);
+      $array = $array->uDiff($call,['b'=>'green','yellow','red']); // ['blue']
+  ```
+  **uDiff** (_callable_ $valueCompare, _array_ $array , _array_ $...) : _\Helper\ArrayObject_
+  - valueCompare : La fonction de comparaison, doit retourner un nombre <0, =0 ou >0
+  - array : Le tableau avec lequel comparer
+  - ... : Plus de tableaux avec lesquels comparer
     
 - `array_diff_assoc`
   
