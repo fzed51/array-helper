@@ -277,4 +277,17 @@ class ArrayObjectTest extends TestCase
         $a = ArrayObject::fillKey(['a', 'b', 'c'], 'a')->getArrayCopy();
         self::assertEquals($e, $a);
     }
+
+    /**
+     * test de flip
+     */
+    public function testFlip(): void
+    {
+        $o = ['a' => 1, 'b' => 2, 'c' => 3];
+        $array = new ArrayObject($o);
+        $e = array_flip($o);
+        $a = $array->flip()->getArrayCopy();
+        self::assertEquals($e, $a);
+        self::assertNotEquals($o, $a);
+    }
 }
