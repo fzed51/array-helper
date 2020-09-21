@@ -79,6 +79,15 @@ $array = new \Helper\ArrayObject([]);
 
 - `array_diff`
 
+  Calcule la différence entre des tableaux
+  ```php
+      $array = new \Helper\ArrayObject(['a'=>'green','red','blue','red']);
+      $array = $array->diff(['b'=>'green','yellow','red']); // ['blue']
+  ```
+  **diff** (_array_ $array , _array_ $...) : _\Helper\ArrayObject_
+  - array : Le tableau avec lequel comparer
+  - ... : Plus de tableaux avec lesquels comparer
+
 - `array_udiff`
     
 - `array_diff_assoc`

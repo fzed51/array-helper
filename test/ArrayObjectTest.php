@@ -290,4 +290,18 @@ class ArrayObjectTest extends TestCase
         self::assertEquals($e, $a);
         self::assertNotEquals($o, $a);
     }
+
+    /**
+     * test de diff
+     */
+    public function testDiff(): void
+    {
+        $o = ['a' => 1, 'b' => 2, 'c' => 3];
+        $t = ['a' => 3, 'b' => 4];
+        $array = new ArrayObject($o);
+        $e = array_diff($o, $t);
+        $a = $array->diff($t)->getArrayCopy();
+        self::assertEquals($e, $a);
+        self::assertNotEquals($o, $a);
+    }
 }

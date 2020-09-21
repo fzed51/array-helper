@@ -230,4 +230,16 @@ class ArrayObject extends \ArrayObject
         $a = $this->getArrayCopy();
         return new self(array_flip($a));
     }
+
+    /**
+     * Calcule la différence entre des tableaux
+     * @param mixed[] $array
+     * @param mixed[] ...$other
+     * @return \Helper\ArrayObject<mixed,mixed>
+     */
+    public function diff(array $array, array ...$other): self
+    {
+        $a = $this->getArrayCopy();
+        return new self(array_diff($a, $array, ...$other));
+    }
 }
