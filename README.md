@@ -192,6 +192,13 @@ $array = new \Helper\ArrayObject([]);
 
 - `array_flip`
 
+  Remplace les clés par les valeurs, et les valeurs par les clés
+  ```php
+      $array = new \Helper\ArrayObject(['a'=>'b', 'c'=>'d']);
+      $array = $array->flip(); // ['b'=>'a', 'd'=>'c']
+  ```
+  **flip** () : _\Helper\ArrayObject_
+  
 - `array_intersect_assoc`
 
 - `array_intersect_key`

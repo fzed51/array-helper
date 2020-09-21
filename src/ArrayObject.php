@@ -220,4 +220,14 @@ class ArrayObject extends \ArrayObject
         $lastArgs[] = $keyCompare;
         return new self(array_diff_ukey($a, $array, ...$lastArgs));
     }
+
+    /**
+     * Remplace les clés par les valeurs, et les valeurs par les clés
+     * @return \Helper\ArrayObject<mixed,mixed>
+     */
+    public function flip(): self
+    {
+        $a = $this->getArrayCopy();
+        return new self(array_flip($a));
+    }
 }
