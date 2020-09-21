@@ -218,16 +218,22 @@ $array = new \Helper\ArrayObject([]);
       $array = $array->flip(); // ['b'=>'a', 'd'=>'c']
   ```
   **flip** () : _\Helper\ArrayObject_
-  
+
+- `array_intersect`
+
+- `array_uintersect`
+
 - `array_intersect_assoc`
 
-- `array_intersect_key`
+- `array_uintersect_assoc`
+  
+- `array_uintersect_uassoc`
 
 - `array_intersect_uassoc`
 
-- `array_intersect_ukey`
+- `array_intersect_key`
 
-- `array_intersect`
+- `array_intersect_ukey`
 
 - `array_key_exists`
 
@@ -280,12 +286,6 @@ $array = new \Helper\ArrayObject([]);
 - `array_splice`
 
 - `array_sum`
-
-- `array_uintersect_assoc`
-
-- `array_uintersect_uassoc`
-
-- `array_uintersect`
 
 - `array_unique`
 
