@@ -299,11 +299,67 @@ $array = new \Helper\ArrayObject([]);
 
 - `array_intersect_assoc`
 
+  Calcule l'intersection de deux tableaux avec des tests sur les index
+
+  ```php
+    $array = new \Helper\ArrayObject(['a'=>'b', 'c'=>'d']);
+    $array = $array->uIntersec(['a'=>'a','c'=>'d','f'=>'g']); // ['c'=>'d']
+  ```
+
+  **intersectAssoc** (_array_ $array , _array_ \$...) : _\Helper\ArrayObject_
+
+  - array : Le tableau avec lequel comparer
+  - ... : Plus de tableaux avec lesquels comparer
+
 - `array_uintersect_assoc`
+
+  Calcule l'intersection de deux tableaux avec des tests sur l'index, compare les données en utilisant une fonction de rappel
+
+  ```php
+    $call = function ($key1, $key2) { return $key1 === $key2 ? 0 : (($key1 > $key2) ? 1 : -1); };
+    $array = new \Helper\ArrayObject(['a'=>'b', 'c'=>'d']);
+    $array = $array->uIntersectAssoc($call, ['a'=>'a','c'=>'d','f'=>'g']); // ['c'=>'d']
+  ```
+
+  **uIntersectAssoc** (_callable_ $valueCompare, _array_ $array , _array_ \$...) : _\Helper\ArrayObject_
+
+  - valueCompare : La fonction de comparaison, doit retourner un nombre <0, =0 ou >0
+  - array : Le tableau avec lequel comparer
+  - ... : Plus de tableaux avec lesquels comparer
 
 - `array_uintersect_uassoc`
 
+  Calcule l'intersection de deux tableaux avec des tests sur l'index, compare les données et les index des deux tableaux en utilisant une fonction de rappel séparée
+
+  ```php
+    $callKey = function ($key1, $key2) { return $key1 === $key2 ? 0 : (($key1 > $key2) ? 1 : -1); };
+    $callVal = function ($key1, $key2) { return $key1 === $key2 ? 0 : (($key1 > $key2) ? 1 : -1); };
+    $array = new \Helper\ArrayObject(['a'=>'b', 'c'=>'d']);
+    $array = $array->uIntersectUAssoc($callVal,$callKey,['a'=>'a','c'=>'d','f'=>'g']); // ['c'=>'d']
+  ```
+
+  **uIntersectUAssoc** (_callable_ $valueCompare, _callable_ $keyCompare, _array_ $array , _array_ \$...) : _\Helper\ArrayObject_
+
+  - valueCompare : La fonction de comparaison doit retourner un entier inférieur à, égal à, ou supérieur à 0 si le premier argument est considéré comme, respectivement, inférieur à, égal à, ou supérieur au second.
+  - keyCompare : La fonction de comparaison doit retourner un entier inférieur à, égal à, ou supérieur à 0 si le premier argument est considéré comme, respectivement, inférieur à, égal à, ou supérieur au second.
+  - array : Le tableau à comparer
+  - ... : Plus de tableaux à comparer
+
 - `array_intersect_uassoc`
+
+Calcule l'intersection de deux tableaux avec des tests sur les index, compare les index en utilisant une fonction de rappel
+
+```php
+    $call = function ($key1, $key2) { return $key1 === $key2 ? 0 : (($key1 > $key2) ? 1 : -1); };
+    $array = new \Helper\ArrayObject(['a'=>'b', 'c'=>'d']);
+    $array = $array->uIntersectAssoc($call, ['a'=>'a','c'=>'d','f'=>'g']); // ['c'=>'d']
+```
+
+**intersectUAssoc** (_callable_ $keyCompare, _array_ $array , _array_ \$...) : _\Helper\ArrayObject_
+
+- keyCompare : La fonction de comparaison doit retourner un entier inférieur à, égal à, ou supérieur à 0 si le premier argument est considéré comme, respectivement, inférieur à, égal à, ou supérieur au second.
+- array : Le tableau avec lequel comparer
+- ... : Plus de tableaux avec lesquels comparer
 
 - `array_intersect_key`
 
