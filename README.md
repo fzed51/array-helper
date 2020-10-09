@@ -347,23 +347,48 @@ $array = new \Helper\ArrayObject([]);
 
 - `array_intersect_uassoc`
 
-Calcule l'intersection de deux tableaux avec des tests sur les index, compare les index en utilisant une fonction de rappel
-
-```php
-    $call = function ($key1, $key2) { return $key1 === $key2 ? 0 : (($key1 > $key2) ? 1 : -1); };
-    $array = new \Helper\ArrayObject(['a'=>'b', 'c'=>'d']);
-    $array = $array->uIntersectAssoc($call, ['a'=>'a','c'=>'d','f'=>'g']); // ['c'=>'d']
-```
-
-**intersectUAssoc** (_callable_ $keyCompare, _array_ $array , _array_ \$...) : _\Helper\ArrayObject_
-
-- keyCompare : La fonction de comparaison doit retourner un entier inférieur à, égal à, ou supérieur à 0 si le premier argument est considéré comme, respectivement, inférieur à, égal à, ou supérieur au second.
-- array : Le tableau avec lequel comparer
-- ... : Plus de tableaux avec lesquels comparer
+    Calcule l'intersection de deux tableaux avec des tests sur les index, compare les index en utilisant une fonction de rappel
+    
+    ```php
+        $call = function ($key1, $key2) { return $key1 === $key2 ? 0 : (($key1 > $key2) ? 1 : -1); };
+        $array = new \Helper\ArrayObject(['a'=>'b', 'c'=>'d']);
+        $array = $array->intersectUAssoc($call, ['a'=>'a','c'=>'d','f'=>'g']); // ['c'=>'d']
+    ```
+    
+    **intersectUAssoc** (_callable_ $keyCompare, _array_ $array , _array_ \$...) : _\Helper\ArrayObject_
+    
+    - keyCompare : La fonction de comparaison doit retourner un entier inférieur à, égal à, ou supérieur à 0 si le premier argument est considéré comme, respectivement, inférieur à, égal à, ou supérieur au second.
+    - array : Le tableau avec lequel comparer
+    - ... : Plus de tableaux avec lesquels comparer
 
 - `array_intersect_key`
 
+    Calcule l'intersection de deux tableaux en utilisant les clés pour comparaison
+    
+    ```php
+          $array = new \Helper\ArrayObject(['a'=>'b', 'c'=>'d', 'f'=>'h']);
+          $array = $array->intersectKey(['a'=>'a','c'=>'d','f'=>'g']); // ['c'=>'d', 'f'=>'h']
+    ```
+    
+    **intersectKey** (_array_ $array , _array_ \$...) : _\Helper\ArrayObject_
+    
+    - array : Le tableau contenant les clés maîtresses à vérifier
+    - ... : Plus de tableaux avec lesquels comparer
+
 - `array_intersect_ukey`
+
+    Calcule l'intersection de deux tableaux en utilisant une fonction de rappel sur les clés pour comparaison
+
+    ```php
+          $array = new \Helper\ArrayObject(['a'=>'b', 'c'=>'d', 'f'=>'h']);
+          $array = $array->intersectUKey(['a'=>'a','c'=>'d','f'=>'g']); // ['c'=>'d', 'f'=>'h']
+    ```
+    
+    **intersectUKey** (_array_ $array , _array_ \$...) : _\Helper\ArrayObject_
+    
+    - keyCompare : La fonction de comparaison doit retourner un entier inférieur à, égal à, ou supérieur à 0 si le premier argument est considéré comme, respectivement, inférieur à, égal à, ou supérieur au second.
+    - array : Le tableau contenant les clés maîtresses à vérifier
+    - ... : Plus de tableaux avec lesquels comparer
 
 - `array_key_exists`
 
@@ -381,7 +406,7 @@ Calcule l'intersection de deux tableaux avec des tests sur les index, compare le
   ```
 
   **array_map** ( _callable_ $callback [, _array_ $... ] ) : _\Helper\ArrayObject_
-
+  
   - array1 : Un tableau à exécuter via la fonction de rappel callback.
   - ... : Liste variable d'arguments tableaux supplémentaires à exécuter via la fonction de rappel callback.
 
