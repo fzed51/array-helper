@@ -257,4 +257,32 @@ class ArrayObject extends \ArrayObject
         $lastArgs[] = $valueCompare;
         return new self(array_udiff($a, $array, ...$lastArgs));
     }
+
+    /**
+     * Calcule l'intersection de tableaux
+     * @param array $array
+     * @param array ...$other
+     * @return \Helper\ArrayObject<mixed,mixed>
+     */
+    public function intersect(array $array, array ...$other): self
+    {
+        $a = $this->getArrayCopy();
+        return new self(array_intersect($a, $array, ...$other));
+    }
+
+
+    /**
+     * Calcule l'intersection de tableaux, compare les données en utilisant une fonction de rappel
+     * @param array $array
+     * @param array ...$other
+     * @return \Helper\ArrayObject<mixed,mixed>
+     */
+    public function uintersect(callable $valueCompare, array $array, array ...$other): self
+    {
+        $a = $this->getArrayCopy();
+        $lastArgs = $other;
+        $lastArgs[] = $valueCompare;
+        return new self(array_uintersect($a, $array, ...$lastArgs));
+    }
+
 }

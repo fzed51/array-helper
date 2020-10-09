@@ -160,7 +160,7 @@ class ArrayObjectTest extends TestCase
     }
 
     /**
-     * test de deffKey
+     * test de diffKey
      */
     public function testDiffKey(): void
     {
@@ -321,6 +321,40 @@ class ArrayObjectTest extends TestCase
         $array = new ArrayObject($o);
         $e = array_udiff($o, $t, $call);
         $a = $array->uDiff($call, $t)->getArrayCopy();
+        self::assertEquals($e, $a);
+        self::assertNotEquals($o, $a);
+    }
+
+    /**
+     * test de intersect
+     */
+    public function testIntersect(): void
+    {
+        $o = ['a' => 1, 'b' => 2, 'c' => 3];
+        $t = ['a' => 3, 'b' => 4];
+        $array = new ArrayObject($o);
+        $e = array_intersect($o, $t);
+        $a = $array->intersect($t)->getArrayCopy();
+        self::assertEquals($e, $a);
+        self::assertNotEquals($o, $a);
+    }
+
+    /**
+     * test de uIntersect
+     */
+    public function testUIntersect(): void
+    {
+        $call = function ($key1, $key2) {
+            if ($key1 === $key2) {
+                return 0;
+            }
+            return $key1 > $key2 ? 1 : -1;
+        };
+        $o = ['a' => 1, 'b' => 2, 'c' => 3];
+        $t = ['a' => 3, 'b' => 4];
+        $array = new ArrayObject($o);
+        $e = array_uintersect($o, $t, $call);
+        $a = $array->uintersect($call, $t)->getArrayCopy();
         self::assertEquals($e, $a);
         self::assertNotEquals($o, $a);
     }
