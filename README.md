@@ -273,7 +273,7 @@ $array = new \Helper\ArrayObject([]);
 
   ```php
     $array = new \Helper\ArrayObject(['a'=>'b', 'c'=>'d']);
-    $array = $array->intersec(['e'=>'d','f'=>'g']); // ['c'=>'d']
+    $array = $array->intersect(['e'=>'d','f'=>'g']); // ['c'=>'d']
   ```
 
   **intersect** (_array_ $array , _array_ $...) : _\Helper\ArrayObject_
@@ -288,7 +288,7 @@ $array = new \Helper\ArrayObject([]);
   ```php
     $call = function ($key1, $key2) { return $key1 === $key2 ? 0 : (($key1 > $key2) ? 1 : -1); };
     $array = new \Helper\ArrayObject(['a'=>'b', 'c'=>'d']);
-    $array = $array->uIntersec(['e'=>'d','f'=>'g']); // ['c'=>'d']
+    $array = $array->uIntersect($call,['e'=>'d','f'=>'g']); // ['c'=>'d']
   ```
 
   **uIntersect** (_callable_ $valueCompare, _array_ $array , _array_ \$...) : _\Helper\ArrayObject_
@@ -303,7 +303,7 @@ $array = new \Helper\ArrayObject([]);
 
   ```php
     $array = new \Helper\ArrayObject(['a'=>'b', 'c'=>'d']);
-    $array = $array->uIntersec(['a'=>'a','c'=>'d','f'=>'g']); // ['c'=>'d']
+    $array = $array->intersectAssoc(['a'=>'a','c'=>'d','f'=>'g']); // ['c'=>'d']
   ```
 
   **intersectAssoc** (_array_ $array , _array_ \$...) : _\Helper\ArrayObject_

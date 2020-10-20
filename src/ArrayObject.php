@@ -285,4 +285,15 @@ class ArrayObject extends \ArrayObject
         return new self(array_uintersect($a, $array, ...$lastArgs));
     }
 
+    /**
+     * Calcule l'intersection de deux tableaux avec des tests sur les index
+     * @param array $array
+     * @param array ...$other
+     * @return \Helper\ArrayObject<mixed,mixed>
+     */
+    public function intersectAssoc(array $array, array ...$other): self
+    {
+        $a = $this->getArrayCopy();
+        return new self(array_intersect_assoc($a, $array, ...$other));
+    }
 }
