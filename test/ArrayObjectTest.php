@@ -372,4 +372,21 @@ class ArrayObjectTest extends TestCase
         self::assertEquals($e, $a);
         self::assertNotEquals($o, $a);
     }
+
+    public function testUIntersectAssoc(): void
+    {
+        $call = function ($key1, $key2) {
+            if ($key1 === $key2) {
+                return 0;
+            }
+            return $key1 > $key2 ? 1 : -1;
+        };
+        $o = ['a' => 1, 'b' => 2, 'c' => 3];
+        $t = ['a' => 3, 'b' => 4];
+        $array = new ArrayObject($o);
+        $e = array_uintersect_assoc($o, $t, $call);
+        $a = $array->uIntersectAssoc($call, $t)->getArrayCopy();
+        self::assertEquals($e, $a);
+        self::assertNotEquals($o, $a);
+    }
 }

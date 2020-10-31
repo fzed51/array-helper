@@ -260,8 +260,8 @@ class ArrayObject extends \ArrayObject
 
     /**
      * Calcule l'intersection de tableaux
-     * @param array $array
-     * @param array ...$other
+     * @param mixed[] $array
+     * @param mixed[] ...$other
      * @return \Helper\ArrayObject<mixed,mixed>
      */
     public function intersect(array $array, array ...$other): self
@@ -273,8 +273,8 @@ class ArrayObject extends \ArrayObject
 
     /**
      * Calcule l'intersection de tableaux, compare les données en utilisant une fonction de rappel
-     * @param array $array
-     * @param array ...$other
+     * @param mixed[] $array
+     * @param mixed[] ...$other
      * @return \Helper\ArrayObject<mixed,mixed>
      */
     public function uintersect(callable $valueCompare, array $array, array ...$other): self
@@ -287,13 +287,29 @@ class ArrayObject extends \ArrayObject
 
     /**
      * Calcule l'intersection de deux tableaux avec des tests sur les index
-     * @param array $array
-     * @param array ...$other
+     * @param mixed[] $array
+     * @param mixed[] ...$other
      * @return \Helper\ArrayObject<mixed,mixed>
      */
     public function intersectAssoc(array $array, array ...$other): self
     {
         $a = $this->getArrayCopy();
         return new self(array_intersect_assoc($a, $array, ...$other));
+    }
+
+    /**
+     * Calcule l'intersection de deux tableaux avec des tests sur l'index, compare les données en utilisant une
+     * fonction de rappel
+     * @param callable $valueCompare
+     * @param mixed[] $array
+     * @param mixed[] ...$other
+     * @return \Helper\ArrayObject<mixed,mixed>
+     */
+    public function uIntersectAssoc(callable $valueCompare, array $array, array ...$other): self
+    {
+        $a = $this->getArrayCopy();
+        $lastArgs = $other;
+        $lastArgs[] = $valueCompare;
+        return new self(array_uintersect_assoc($a, $array, ...$lastArgs));
     }
 }
